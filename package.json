@@ -1,0 +1,48 @@
+{
+  "name": "equipo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    
+    "ngrok": "ngrok http 5173",
+    "ngrok:setup": "echo 'Ve a https://dashboard.ngrok.com/get-started/your-authtoken y copia tu token'",
+    "dev:host": "vite --host",
+    "dev:public": "concurrently -n \"VITE,NGROK\" -c \"green,blue\" \"npm run dev\" \"npm run ngrok\"",
+    "start": "npm run dev",
+    "public": "npm run dev:public"
+  },
+  "dependencies": {
+    "@cloudinary/react": "^1.14.3",
+    "@cloudinary/url-gen": "^1.22.0",
+    "@tailwindcss/vite": "^4.1.16",
+    "framer-motion": "^12.23.24",
+    "lucide-react": "^0.553.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^10.0.0",
+    "react-scroll": "^1.9.3",
+    "tailwindcss": "^4.1.16"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^24.6.0",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.1.2",
+    "babel-plugin-react-compiler": "^19.1.0-rc.3",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.45.0",
+    "vite": "^7.1.7"
+  }
+}
