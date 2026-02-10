@@ -7,24 +7,24 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  
+
   server: {
-    host: true,  // ESTO ES CLAVE para exponer en red
+    host: true, // expone la app en red
     port: 5173,
     strictPort: true,
-    
-    // Permite ngrok y otros hosts
+
+    // Permite ngrok y dominios externos
     allowedHosts: [
       'localhost',
       '.ngrok-free.app',
       '.ngrok.io',
-      '.ngrok.dev'
+      '.ngrok.dev',
     ],
-    
-    // Hot Reload optimizado
+
+    // HMR estable con HTTPS (ngrok)
     hmr: {
+      protocol: 'wss',
       clientPort: 443,
-      protocol: 'wss'
-    }
-  }
+    },
+  },
 })

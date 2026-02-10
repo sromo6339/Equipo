@@ -1,13 +1,22 @@
 @import "tailwindcss";
+
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .animate-float {
   animation: float 3.5s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* El valor estándar para navbars comunes suele ser entre 70px y 100px */
+  scroll-padding-top: 100px; 
+}
+
+/* Evita que el scroll se vea cortado si el usuario usa un mouse con rueda */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }

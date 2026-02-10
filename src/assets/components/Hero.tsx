@@ -174,39 +174,13 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, activeSection }) => {
   }, []);
 
   // Cerrar menú móvil al hacer clic fuera o en enlaces
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      
-      // Si el clic es en el botón hamburguesa, manejarlo en su propio onClick
-      if (hamburgerRef.current && hamburgerRef.current.contains(target)) {
-        return;
-      }
-      
-      // Si el clic es dentro del menú móvil, no cerrar
-      if (mobileMenuRef.current && mobileMenuRef.current.contains(target)) {
-        return;
-      }
-      
-      // Cerrar el menú si se hace clic fuera
-      setMobileMenuOpen(false);
-    };
+  {mobileMenuOpen && (
+  <div 
+    className="lg:hidden fixed inset-0 bg-black/50 z-30 top-full"
+    onClick={() => setMobileMenuOpen(false)}
+  />
+)}
 
-    // También cerrar al presionar Escape
-    const handleEscapeKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEscapeKey);
-    
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, []);
 
   // Función para manejar clics en navegación
   const handleNavigation = (section: string) => {
@@ -319,55 +293,52 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, activeSection }) => {
     >
 
       {/* HEADER COMPLETO CON LOGO Y MENÚ */}
+    {/* HEADER COMPLETO */}
       <header className={`
         fixed top-0 left-0 w-full z-50 
         transition-all duration-300 ease-in-out
-        ${scrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-gradient-to-b from-black/80 to-transparent'}
-        cursor-default
+        ${scrolled || mobileMenuOpen ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-gradient-to-b from-black/80 to-transparent'}
       `}>
         <div className="container mx-auto px-4">
-          {/* Contenedor del header - DIFERENTE PARA MÓVIL Y DESKTOP */}
           
-          {/* VERSIÓN MÓVIL (solo se muestra en móvil) */}
-          <div className="lg:hidden flex items-center justify-between">
-            {/* Botón hamburguesa para móvil - Esquina izquierda */}
+          {/* VERSIÓN MÓVIL */}
+          <div className="lg:hidden flex items-center justify-between h-20">
+            {/* Botón hamburguesa */}
             <button
               ref={hamburgerRef}
               onClick={toggleMobileMenu}
-              className="hamburger-btn p-3 rounded-md bg-black/80 hover:bg-black transition-all duration-200 active:scale-95"
-              aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-              aria-expanded={mobileMenuOpen}
+              className="p-3 rounded-md hover:bg-white/10 transition-all duration-200 z-50"
+              aria-label="Menu"
               type="button"
             >
               {mobileMenuOpen ? (
-                <X className="w-6 h-6 text-white" />
+                <X className="w-8 h-8 text-sky-400" />
               ) : (
-                <Menu className="w-6 h-6 text-white" />
+                <Menu className="w-8 h-8 text-white" />
               )}
             </button>
 
-            {/* Logo centrado en móvil */}
+            {/* Logo centrado */}
             <button
               onClick={handleLogoClick}
-              className="flex justify-center items-center py-3 cursor-pointer bg-transparent border-0 p-0"
+              className="flex justify-center items-center py-3 bg-transparent border-0"
             >
               <AdvancedImage
                 cldImg={topLogo}
-                className="w-16 h-16 object-contain"
+                className="w-14 h-14 object-contain"
                 alt="Logo"
               />
             </button>
 
-            {/* Espacio vacío para balancear el layout (mismo ancho que el botón hamburguesa) */}
+            {/* Espaciador para centrar logo */}
             <div className="w-12"></div>
           </div>
 
-          {/* VERSIÓN DESKTOP/TABLET (se muestra en lg y superior) */}
+          {/* VERSIÓN DESKTOP */}
           <div className="hidden lg:block">
-            {/* Logo centrado - igual que antes */}
             <button
               onClick={handleLogoClick}
-              className="flex justify-center items-center py-3 cursor-pointer w-full bg-transparent border-0 p-0"
+              className="flex justify-center items-center py-3 w-full bg-transparent border-0"
             >
               <AdvancedImage
                 cldImg={topLogo}
@@ -376,63 +347,37 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, activeSection }) => {
               />
             </button>
 
-            {/* Menú solo en Desktop/Tablate - SIN CAMBIOS */}
-            <div className="hidden lg:block pb-2">
-              <div className="flex justify-center gap-10 text-lg tracking-wide">
-                <NavButton label="INICIO" section="inicio" />
-                <NavButton label="INNOVATION" section="innovation" />
-                <NavButton label="CONÓCENOS" section="conocenos" />
-                <NavButton label="CONTACTO" section="contacto" />
-              </div>
+            <div className="flex justify-center gap-10 pb-4">
+              <NavButton label="INICIO" section="inicio" />
+              <NavButton label="INNOVATION" section="innovation" />
+              <NavButton label="CONÓCENOS" section="conocenos" />
+              <NavButton label="CONTACTO" section="contacto" />
             </div>
           </div>
         </div>
 
-        {/* MENÚ MÓVIL - SOLO PARA MÓVIL */}
+        {/* MENÚ MÓVIL DESPLEGABLE */}
         <div 
           ref={mobileMenuRef}
           className={`
-            lg:hidden mobile-menu fixed left-0 right-0 top-full
-            bg-black/95 backdrop-blur-md shadow-xl
-            transition-all duration-300 ease-in-out z-40
+            lg:hidden fixed left-0 right-0 bg-black/98 backdrop-blur-lg
+            transition-all duration-300 ease-in-out border-t border-white/10
             ${mobileMenuOpen 
-              ? 'opacity-100 translate-y-0 pointer-events-auto' 
-              : 'opacity-0 -translate-y-4 pointer-events-none'
+              ? 'top-[80px] opacity-100 visible h-auto pb-10' 
+              : 'top-[-100%] opacity-0 invisible h-0'
             }
           `}
         >
-          <div className="container mx-auto px-4 py-2">
-            <div className="flex flex-col">
-              <MobileNavButton label="INICIO" section="inicio" />
-              <MobileNavButton label="INNOVATION" section="innovation" />
-              <MobileNavButton label="CONÓCENOS" section="conocenos" />
-              <MobileNavButton label="CONTACTO" section="contacto" />
-            </div>
+          <div className="flex flex-col p-4">
+            <MobileNavButton label="INICIO" section="inicio" />
+            <MobileNavButton label="INNOVATION" section="innovation" />
+            <MobileNavButton label="CONÓCENOS" section="conocenos" />
+            <MobileNavButton label="CONTACTO" section="contacto" />
             
-            {/* Indicador de sección activa */}
-            <div className="mt-4 px-6 py-3 border-t border-gray-800">
-              <p className="text-gray-400 text-sm">
-                Sección actual: 
-                <span className="text-sky-400 font-medium ml-2">
-                  {activeSection === 'inicio' && 'INICIO'}
-                  {activeSection === 'innovation' && 'INNOVATION'}
-                  {activeSection === 'conocenos' && 'CONÓCENOS'}
-                  {activeSection === 'contacto' && 'CONTACTO'}
-                </span>
-              </p>
-            </div>
+           
           </div>
         </div>
-
-        {/* Overlay para fondo oscuro cuando el menú está abierto - SOLO MÓVIL */}
-        {mobileMenuOpen && (
-          <div 
-            className="lg:hidden fixed inset-0 bg-black/50 z-30 top-full"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        )}
       </header>
-
       {/* Espacio para compensar el header fijo */}
       <div className="h-[120px] lg:h-[140px]"></div>
 

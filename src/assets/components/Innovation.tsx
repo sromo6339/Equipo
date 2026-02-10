@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 
 const images = [
   { id: "lfl2k2qzsbbyqkwjqbht", title: "COOP A.C" },
-  { id: "tl4jsgq9oyxvfkko3bnc", title: "UNO " },
-  { id: "zxajertzcsqhcmb0ckku", title: "COOP A.C PIJAL" },
+  { id: "ejnigfdejbufjeigdha5", title: "TU MARCA" },
+  { id: "zxajertzcsqhcmb0ckku", title: "COOP A.C PIJAL" }, 
   { id: "zntvhwd5x89vuswvpcld", title: "IBARRA" },
   { id: "bkgqrsbbh5yl2ys1ajqm", title: "BICI" },
   { id: "ufssv9n7wp1lawagplkt", title: "DENTAL BOX" },
@@ -17,8 +17,9 @@ const images = [
   { id: "yf1dst1c3eaccfcoo10w", title: "GRILLED " },
   { id: "u6pxay4rlp3nhziqgdha", title: "GLOBAL TV" },
   { id: "h8us3la3qqe37sp791xr", title: "SOLO TAMALES" },
+  { id: "tl4jsgq9oyxvfkko3bnc", title: "UNO " },
   { id: "gaklaip5jcxzwersmpy4", title: "DECORCONS" },
-  { id: "xvcpofradzpyzj6fobne", title: "TU MARCA" }, // <-- AQUÍ AGREGUÉ LA IMAGEN FALTANTE
+  
 ];
 
 // IDs que NO deben tener fondo blanco
@@ -26,7 +27,7 @@ const sinFondoBlanco = [
   "bkgqrsbbh5yl2ys1ajqm", // BICI
   "pdyjbohm7wpefgtyb4ll", // BEERTEINS
   "moacyyajrkh8nntkfevq", // MARMONTE
-  "xvcpofradzpyzj6fobne", // TU MARCA
+  "ejnigfdejbufjeigdha5", // TU MARCA
   "h8us3la3qqe37sp791xr", // SOLO TAMALES
 ];
 

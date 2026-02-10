@@ -40,18 +40,25 @@ const Footer: React.FC = () => {
             <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
               EQUIPU
             </h3>
-            <ul className="space-y-2">
-              {['Inicio', 'Innovation', 'Conócenos', 'Contacto'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href="#" 
-                    className="text-white hover:text-gray-300 transition-colors duration-200 text-xs"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <ul className="space-y-2">
+  {[
+    { label: 'Inicio', section: 'inicio' },
+    { label: 'Innovation', section: 'innovation' },
+    { label: 'Conócenos', section: 'conocenos' },
+    { label: 'Contacto', section: 'contacto' },
+  ].map((item) => (
+    <li key={item.section}>
+      <a
+        href={`#${item.section}`}
+        className="text-white hover:text-gray-300 transition-colors duration-200 text-xs"
+      >
+        {item.label}
+      </a>
+    </li>
+  ))}
+</ul>
+
+
           </div>
 
           {/* COLUMNA 2 */}
