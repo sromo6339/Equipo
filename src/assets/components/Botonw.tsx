@@ -30,7 +30,7 @@ const BotonW = () => {
               whitespace-nowrap mb-2
             "
           >
-            Consulta cualquier auditoría gratuita
+            Escríbenos
           </motion.div>
         )}
       </AnimatePresence>
