@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const images = [
   { id: "lfl2k2qzsbbyqkwjqbht", title: "COOP A.C" },
@@ -59,8 +59,6 @@ const Innovation = () => {
     return () => clearInterval(interval);
   }, [isVisible]);
 
-  // Calcula el número de grupos basado en la cantidad de imágenes
-  const totalGroups = Math.ceil(images.length / 3);
   const visibleImages = images.slice(currentGroup * 3, currentGroup * 3 + 3);
 
   const handleVerMasClick = () => {

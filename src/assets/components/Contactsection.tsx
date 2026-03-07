@@ -3,10 +3,6 @@ import { MapPin, Phone } from "lucide-react";
 import ContactForm from "./Contactform"; // Ajusta la ruta según tu estructura
 
 const Footer: React.FC = () => {
-  const handleSubmit = (formData: any) => {
-    console.log("Formulario enviado:", formData);
-  };
-
   const openWhatsApp = () => {
     window.open("https://api.whatsapp.com/message/SDGY7DDVMQVOM1?autoload=1&app_absent=0", "_blank");
   };
@@ -30,7 +26,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative w-full text-white border-t border-gray-900">
       {/* 🔥 OVERLAY DEGRADADO: de tu color a negro */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#151515] via-[#151515] to-black opacity-100"></div>
+      <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-[#151515] via-[#151515] to-black opacity-100"></div>
 
       {/* Contenido sobre el degradado */}
       <div className="relative container mx-auto px-6 md:px-20 py-8 md:py-12">
